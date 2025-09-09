@@ -17,7 +17,7 @@ const Header = ({ cartItemsCount, onCartClick }: HeaderProps) => {
         {/* Top bar */}
         <div className="flex items-center justify-between py-2 text-sm text-muted-foreground border-b border-border/50">
           <div className="flex items-center gap-4">
-            <span>📞 +91 98765 43210</span>
+            <span>📞 +91 81799 16434</span>
             <span>📧 info@maharajacrackers.com</span>
           </div>
           <div className="hidden md:flex items-center gap-4">
