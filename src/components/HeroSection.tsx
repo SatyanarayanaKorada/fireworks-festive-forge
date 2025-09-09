@@ -17,7 +17,7 @@ const HeroSection = () => {
           <div className="max-w-2xl text-center md:text-left">
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-foreground mb-6 leading-tight">
               Light Up Your
-              <span className="block bg-gradient-festival bg-clip-text text-transparent animate-sparkle">
+              <span className="block bg-gradient-festival bg-clip-text text-transparent">
                 Celebrations
               </span>
             </h1>
