@@ -22,6 +22,7 @@ export default {
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
+          glow: "hsl(var(--primary-glow))",
         },
         secondary: {
           DEFAULT: "hsl(var(--secondary))",
@@ -47,6 +48,14 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        "festival-red": {
+          DEFAULT: "hsl(var(--festival-red))",
+          foreground: "hsl(var(--festival-red-foreground))",
+        },
+        "royal-purple": {
+          DEFAULT: "hsl(var(--royal-purple))",
+          foreground: "hsl(var(--royal-purple-foreground))",
+        },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",
@@ -62,6 +71,16 @@ export default {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
+      },
+      backgroundImage: {
+        "gradient-festival": "var(--gradient-festival)",
+        "gradient-royal": "var(--gradient-royal)",
+        "gradient-sparkle": "var(--gradient-sparkle)",
+      },
+      boxShadow: {
+        "glow": "var(--shadow-glow)",
+        "festival": "var(--shadow-festival)",
+        "royal": "var(--shadow-royal)",
       },
       keyframes: {
         "accordion-down": {
@@ -80,10 +99,34 @@ export default {
             height: "0",
           },
         },
+        "sparkle": {
+          "0%": {
+            transform: "scale(1) rotate(0deg)",
+            opacity: "1",
+          },
+          "50%": {
+            transform: "scale(1.05) rotate(180deg)",
+            opacity: "0.8",
+          },
+          "100%": {
+            transform: "scale(1) rotate(360deg)",
+            opacity: "1",
+          },
+        },
+        "glow-pulse": {
+          "0%, 100%": {
+            boxShadow: "0 0 20px hsl(var(--primary) / 0.3)",
+          },
+          "50%": {
+            boxShadow: "0 0 40px hsl(var(--primary) / 0.6)",
+          },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "sparkle": "sparkle 3s ease-in-out infinite",
+        "glow-pulse": "glow-pulse 2s ease-in-out infinite",
       },
     },
   },
