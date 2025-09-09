@@ -84,12 +84,12 @@ const Footer = () => {
               <div className="flex items-center gap-3">
                 <MapPin className="w-4 h-4 text-primary flex-shrink-0" />
                 <span className="text-muted-foreground text-sm">
-                  123 Festival Street, Diwali Nagar, Mumbai - 400001
+                  Shop no 369 Iron yard beside reliance digital gate Bhavani Puram Vijayawada (520012)
                 </span>
               </div>
               <div className="flex items-center gap-3">
                 <Phone className="w-4 h-4 text-primary flex-shrink-0" />
-                <span className="text-muted-foreground text-sm">+91 98765 43210</span>
+                <span className="text-muted-foreground text-sm">+91 81799 16434</span>
               </div>
               <div className="flex items-center gap-3">
                 <Mail className="w-4 h-4 text-primary flex-shrink-0" />
