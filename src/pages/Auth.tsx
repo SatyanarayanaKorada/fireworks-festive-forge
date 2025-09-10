@@ -26,6 +26,35 @@ const Auth = () => {
     }
   }, [user, navigate]);
 
+  // SEO: set title, description and canonical for /auth
+  useEffect(() => {
+    document.title = "Login or Create Account | Maharaja Crackers";
+    const meta = document.querySelector('meta[name="description"]') || (() => {
+      const m = document.createElement('meta'); m.name = 'description'; document.head.appendChild(m); return m;
+    })();
+    meta.setAttribute('content', 'Login or create an account with name, email and phone to shop fireworks at Maharaja Crackers.');
+    const linkCanonical = document.querySelector('link[rel="canonical"]') || (() => {
+      const l = document.createElement('link'); l.setAttribute('rel','canonical'); document.head.appendChild(l); return l;
+    })();
+    linkCanonical.setAttribute('href', window.location.origin + '/#/auth');
+  }, []);
+
+  // Persist non-sensitive fields so changes are kept on refresh
+  useEffect(() => {
+    const savedName = localStorage.getItem('auth_name') || '';
+    const savedPhone = localStorage.getItem('auth_phone') || '';
+    const savedEmail = localStorage.getItem('auth_email') || '';
+    if (savedName) setFullName(savedName);
+    if (savedPhone) setPhone(savedPhone);
+    if (savedEmail) setEmail(savedEmail);
+  }, []);
+
+  useEffect(() => {
+    if (fullName) localStorage.setItem('auth_name', fullName);
+    if (phone) localStorage.setItem('auth_phone', phone);
+    if (email) localStorage.setItem('auth_email', email);
+  }, [fullName, phone, email]);
+
   const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
@@ -80,7 +109,8 @@ const Auth = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-festival flex items-center justify-center p-4">
+    <main className="min-h-screen bg-gradient-festival flex items-center justify-center p-4">
+      <h1 className="sr-only">Login or Create Account - Maharaja Crackers</h1>
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
           <CardTitle className="text-2xl font-bold bg-gradient-festival bg-clip-text text-transparent">
@@ -108,6 +138,7 @@ const Auth = () => {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
+                    autoComplete="email"
                   />
                 </div>
                 <div className="space-y-2">
@@ -119,6 +150,8 @@ const Auth = () => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
+                    autoComplete="current-password"
+                    minLength={6}
                   />
                 </div>
                 <Button 
@@ -126,6 +159,7 @@ const Auth = () => {
                   className="w-full" 
                   variant="hero"
                   disabled={isLoading}
+                  aria-busy={isLoading}
                 >
                   {isLoading ? (
                     <>
@@ -150,6 +184,7 @@ const Auth = () => {
                     value={fullName}
                     onChange={(e) => setFullName(e.target.value)}
                     required
+                    autoComplete="name"
                   />
                 </div>
                 <div className="space-y-2">
@@ -161,6 +196,9 @@ const Auth = () => {
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                     required
+                    autoComplete="tel"
+                    inputMode="tel"
+                    pattern="^[0-9+()\-\s]{7,15}$"
                   />
                 </div>
                 <div className="space-y-2">
@@ -172,6 +210,7 @@ const Auth = () => {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
+                    autoComplete="email"
                   />
                 </div>
                 <div className="space-y-2">
@@ -183,6 +222,8 @@ const Auth = () => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
+                    autoComplete="new-password"
+                    minLength={6}
                   />
                 </div>
                 <div className="space-y-2">
@@ -194,6 +235,8 @@ const Auth = () => {
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
                     required
+                    autoComplete="new-password"
+                    minLength={6}
                   />
                 </div>
                 <Button 
@@ -201,6 +244,7 @@ const Auth = () => {
                   className="w-full" 
                   variant="hero"
                   disabled={isLoading}
+                  aria-busy={isLoading}
                 >
                   {isLoading ? (
                     <>
@@ -216,7 +260,7 @@ const Auth = () => {
           </Tabs>
         </CardContent>
       </Card>
-    </div>
+    </main>
   );
 };
 
