@@ -7,7 +7,7 @@ interface AuthContextType {
   session: Session | null;
   loading: boolean;
   signIn: (email: string, password: string) => Promise<{ error: any }>;
-  signUp: (email: string, password: string, fullName: string) => Promise<{ error: any }>;
+  signUp: (email: string, password: string, fullName: string, phone?: string) => Promise<{ error: any }>;
   signOut: () => Promise<void>;
 }
 
@@ -30,21 +30,56 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [session, setSession] = useState<Session | null>(null);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    // Set up auth state listener
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      (event, session) => {
-        setSession(session);
-        setUser(session?.user ?? null);
-        setLoading(false);
-      }
-    );
+  // Ensure the user's profile exists in the database after sign-in
+  const ensureProfile = async (currentSession: Session | null) => {
+    try {
+      const user = currentSession?.user;
+      if (!user) return;
 
-    // Check for existing session
+      // Check if profile exists
+      const { data: existing, error: selectError } = await supabase
+        .from('profiles')
+        .select('id')
+        .eq('user_id', user.id)
+        .maybeSingle();
+
+      if (selectError && selectError.code !== 'PGRST116') {
+        // Ignore empty result errors; otherwise log
+        console.warn('Profile select error:', selectError);
+      }
+
+      if (!existing) {
+        const { full_name, phone } = (user.user_metadata as any) || {};
+        const { error: insertError } = await supabase.from('profiles').insert({
+          user_id: user.id,
+          full_name: full_name ?? null,
+          phone: phone ?? null,
+        });
+        if (insertError) {
+          console.warn('Profile insert error:', insertError);
+        }
+      }
+    } catch (err) {
+      console.warn('ensureProfile error:', err);
+    }
+  };
+
+  useEffect(() => {
+    // Set up auth state listener FIRST
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      setSession(session);
+      setUser(session?.user ?? null);
+      setLoading(false);
+      // Defer any Supabase calls to avoid deadlocks
+      setTimeout(() => ensureProfile(session), 0);
+    });
+
+    // THEN check for existing session
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session);
       setUser(session?.user ?? null);
       setLoading(false);
+      setTimeout(() => ensureProfile(session), 0);
     });
 
     return () => subscription.unsubscribe();
@@ -58,7 +93,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     return { error };
   };
 
-  const signUp = async (email: string, password: string, fullName: string) => {
+  const signUp = async (email: string, password: string, fullName: string, phone?: string) => {
     const redirectUrl = `${window.location.origin}/`;
     
     const { error } = await supabase.auth.signUp({
@@ -68,6 +103,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         emailRedirectTo: redirectUrl,
         data: {
           full_name: fullName,
+          phone: phone ?? null,
         },
       },
     });
