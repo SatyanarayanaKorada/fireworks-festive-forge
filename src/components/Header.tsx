@@ -2,6 +2,7 @@ import { ShoppingCart, User, Search, Menu, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 interface HeaderProps {
   cartItemsCount: number;
@@ -60,10 +61,17 @@ const Header = ({ cartItemsCount, onCartClick }: HeaderProps) => {
             </div>
 
             {/* User Account */}
-            <Button variant="ghost" size="icon">
-              <User className="w-5 h-5" />
+            <Button variant="outline" asChild className="hidden md:inline-flex">
+              <Link to="/auth" aria-label="Login or create account">
+                <User className="w-5 h-5 mr-2" />
+                Login / Create Account
+              </Link>
             </Button>
-
+            <Button variant="ghost" size="icon" asChild className="md:hidden">
+              <Link to="/auth" aria-label="Account">
+                <User className="w-5 h-5" />
+              </Link>
+            </Button>
             {/* Cart */}
             <Button variant="outline" size="icon" onClick={onCartClick} className="relative">
               <ShoppingCart className="w-5 h-5" />
@@ -103,6 +111,7 @@ const Header = ({ cartItemsCount, onCartClick }: HeaderProps) => {
               <a href="#" className="text-foreground hover:text-primary transition-colors font-medium py-2">Categories</a>
               <a href="#" className="text-foreground hover:text-primary transition-colors font-medium py-2">About Us</a>
               <a href="#" className="text-foreground hover:text-primary transition-colors font-medium py-2">Contact</a>
+              <Link to="/auth" className="text-foreground hover:text-primary transition-colors font-medium py-2">Login / Create Account</Link>
             </div>
           </nav>
         )}
