@@ -35,7 +35,12 @@ const FeaturedProducts = ({ products, onAddToCart, onViewDetails }: FeaturedProd
         </div>
 
         <div className="text-center">
-          <Button variant="hero" size="lg" className="px-8">
+          <Button 
+            variant="hero" 
+            size="lg" 
+            className="px-8 hover:scale-105 transition-all duration-300"
+            onClick={() => document.getElementById('categories')?.scrollIntoView({ behavior: 'smooth' })}
+          >
             View All Products
             <ArrowRight className="w-5 h-5 ml-2" />
           </Button>

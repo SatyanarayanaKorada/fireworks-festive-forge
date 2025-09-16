@@ -26,10 +26,20 @@ const HeroSection = () => {
               Safe, colorful, and magical moments guaranteed.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-              <Button size="lg" variant="hero" className="text-lg px-8 py-4">
+              <Button 
+                size="lg" 
+                variant="hero" 
+                className="text-lg px-8 py-4 hover:scale-105 transition-all duration-300"
+                onClick={() => document.getElementById('featured-products')?.scrollIntoView({ behavior: 'smooth' })}
+              >
                 🛒 Shop Now
               </Button>
-              <Button size="lg" variant="outline" className="text-lg px-8 py-4 bg-white/10 backdrop-blur border-white/30 text-white hover:bg-white/20">
+              <Button 
+                size="lg" 
+                variant="outline" 
+                className="text-lg px-8 py-4 bg-white/10 backdrop-blur border-white/30 text-white hover:bg-white/20 hover:scale-105 transition-all duration-300"
+                onClick={() => document.getElementById('categories')?.scrollIntoView({ behavior: 'smooth' })}
+              >
                 🎁 Gift Boxes
               </Button>
             </div>

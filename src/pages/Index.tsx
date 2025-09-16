@@ -89,18 +89,24 @@ const Index = () => {
       
       <main>
         <HeroSection />
-        <Categories 
-          categories={categories}
-          onCategoryClick={handleCategoryClick}
-        />
-        <FeaturedProducts 
-          products={featuredProducts}
-          onAddToCart={addToCart}
-          onViewDetails={handleViewDetails}
-        />
+        <div id="categories">
+          <Categories 
+            categories={categories}
+            onCategoryClick={handleCategoryClick}
+          />
+        </div>
+        <div id="featured-products">
+          <FeaturedProducts 
+            products={featuredProducts}
+            onAddToCart={addToCart}
+            onViewDetails={handleViewDetails}
+          />
+        </div>
       </main>
 
-      <Footer />
+      <div id="footer">
+        <Footer />
+      </div>
 
       <Cart
         isOpen={isCartOpen}

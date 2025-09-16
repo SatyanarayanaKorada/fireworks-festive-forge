@@ -41,11 +41,11 @@ const Header = ({ cartItemsCount, onCartClick }: HeaderProps) => {
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center space-x-8">
-            <a href="#" className="text-foreground hover:text-primary transition-colors font-medium">Home</a>
-            <a href="#" className="text-foreground hover:text-primary transition-colors font-medium">Shop</a>
-            <a href="#" className="text-foreground hover:text-primary transition-colors font-medium">Categories</a>
-            <a href="#" className="text-foreground hover:text-primary transition-colors font-medium">About Us</a>
-            <a href="#" className="text-foreground hover:text-primary transition-colors font-medium">Contact</a>
+            <Link to="/" className="text-foreground hover:text-primary transition-colors font-medium">Home</Link>
+            <button onClick={() => document.getElementById('featured-products')?.scrollIntoView({ behavior: 'smooth' })} className="text-foreground hover:text-primary transition-colors font-medium">Shop</button>
+            <button onClick={() => document.getElementById('categories')?.scrollIntoView({ behavior: 'smooth' })} className="text-foreground hover:text-primary transition-colors font-medium">Categories</button>
+            <button onClick={() => document.getElementById('footer')?.scrollIntoView({ behavior: 'smooth' })} className="text-foreground hover:text-primary transition-colors font-medium">About Us</button>
+            <button onClick={() => document.getElementById('footer')?.scrollIntoView({ behavior: 'smooth' })} className="text-foreground hover:text-primary transition-colors font-medium">Contact</button>
           </nav>
 
           {/* Search and Actions */}
@@ -106,11 +106,11 @@ const Header = ({ cartItemsCount, onCartClick }: HeaderProps) => {
                 />
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground" />
               </div>
-              <a href="#" className="text-foreground hover:text-primary transition-colors font-medium py-2">Home</a>
-              <a href="#" className="text-foreground hover:text-primary transition-colors font-medium py-2">Shop</a>
-              <a href="#" className="text-foreground hover:text-primary transition-colors font-medium py-2">Categories</a>
-              <a href="#" className="text-foreground hover:text-primary transition-colors font-medium py-2">About Us</a>
-              <a href="#" className="text-foreground hover:text-primary transition-colors font-medium py-2">Contact</a>
+              <Link to="/" className="text-foreground hover:text-primary transition-colors font-medium py-2" onClick={() => setIsMenuOpen(false)}>Home</Link>
+              <button onClick={() => { document.getElementById('featured-products')?.scrollIntoView({ behavior: 'smooth' }); setIsMenuOpen(false); }} className="text-foreground hover:text-primary transition-colors font-medium py-2 text-left">Shop</button>
+              <button onClick={() => { document.getElementById('categories')?.scrollIntoView({ behavior: 'smooth' }); setIsMenuOpen(false); }} className="text-foreground hover:text-primary transition-colors font-medium py-2 text-left">Categories</button>
+              <button onClick={() => { document.getElementById('footer')?.scrollIntoView({ behavior: 'smooth' }); setIsMenuOpen(false); }} className="text-foreground hover:text-primary transition-colors font-medium py-2 text-left">About Us</button>
+              <button onClick={() => { document.getElementById('footer')?.scrollIntoView({ behavior: 'smooth' }); setIsMenuOpen(false); }} className="text-foreground hover:text-primary transition-colors font-medium py-2 text-left">Contact</button>
               <Link to="/auth" className="text-foreground hover:text-primary transition-colors font-medium py-2">Login / Create Account</Link>
             </div>
           </nav>
