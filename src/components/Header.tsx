@@ -2,7 +2,6 @@ import { ShoppingCart, User, Search, Menu, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
-import { Link } from "react-router-dom";
 
 interface HeaderProps {
   cartItemsCount: number;
@@ -41,7 +40,7 @@ const Header = ({ cartItemsCount, onCartClick }: HeaderProps) => {
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center space-x-8">
-            <Link to="/" className="text-foreground hover:text-primary transition-colors font-medium">Home</Link>
+            <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="text-foreground hover:text-primary transition-colors font-medium">Home</button>
             <button onClick={() => document.getElementById('featured-products')?.scrollIntoView({ behavior: 'smooth' })} className="text-foreground hover:text-primary transition-colors font-medium">Shop</button>
             <button onClick={() => document.getElementById('categories')?.scrollIntoView({ behavior: 'smooth' })} className="text-foreground hover:text-primary transition-colors font-medium">Categories</button>
             <button onClick={() => document.getElementById('footer')?.scrollIntoView({ behavior: 'smooth' })} className="text-foreground hover:text-primary transition-colors font-medium">About Us</button>
@@ -61,16 +60,23 @@ const Header = ({ cartItemsCount, onCartClick }: HeaderProps) => {
             </div>
 
             {/* User Account */}
-            <Button variant="outline" asChild className="hidden md:inline-flex">
-              <Link to="/auth" aria-label="Login or create account">
-                <User className="w-5 h-5 mr-2" />
-                Login / Create Account
-              </Link>
+            <Button 
+              variant="outline" 
+              className="hidden md:inline-flex"
+              onClick={() => window.location.href = '/#/auth'}
+              aria-label="Login or create account"
+            >
+              <User className="w-5 h-5 mr-2" />
+              Login / Create Account
             </Button>
-            <Button variant="ghost" size="icon" asChild className="md:hidden">
-              <Link to="/auth" aria-label="Account">
-                <User className="w-5 h-5" />
-              </Link>
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              className="md:hidden"
+              onClick={() => window.location.href = '/#/auth'}
+              aria-label="Account"
+            >
+              <User className="w-5 h-5" />
             </Button>
             {/* Cart */}
             <Button variant="outline" size="icon" onClick={onCartClick} className="relative">
@@ -106,12 +112,12 @@ const Header = ({ cartItemsCount, onCartClick }: HeaderProps) => {
                 />
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground" />
               </div>
-              <Link to="/" className="text-foreground hover:text-primary transition-colors font-medium py-2" onClick={() => setIsMenuOpen(false)}>Home</Link>
+              <button onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }); setIsMenuOpen(false); }} className="text-foreground hover:text-primary transition-colors font-medium py-2 text-left">Home</button>
               <button onClick={() => { document.getElementById('featured-products')?.scrollIntoView({ behavior: 'smooth' }); setIsMenuOpen(false); }} className="text-foreground hover:text-primary transition-colors font-medium py-2 text-left">Shop</button>
               <button onClick={() => { document.getElementById('categories')?.scrollIntoView({ behavior: 'smooth' }); setIsMenuOpen(false); }} className="text-foreground hover:text-primary transition-colors font-medium py-2 text-left">Categories</button>
               <button onClick={() => { document.getElementById('footer')?.scrollIntoView({ behavior: 'smooth' }); setIsMenuOpen(false); }} className="text-foreground hover:text-primary transition-colors font-medium py-2 text-left">About Us</button>
               <button onClick={() => { document.getElementById('footer')?.scrollIntoView({ behavior: 'smooth' }); setIsMenuOpen(false); }} className="text-foreground hover:text-primary transition-colors font-medium py-2 text-left">Contact</button>
-              <Link to="/auth" className="text-foreground hover:text-primary transition-colors font-medium py-2">Login / Create Account</Link>
+              <button onClick={() => { window.location.href = '/#/auth'; setIsMenuOpen(false); }} className="text-foreground hover:text-primary transition-colors font-medium py-2 text-left">Login / Create Account</button>
             </div>
           </nav>
         )}
