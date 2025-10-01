@@ -27,53 +27,74 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Quick Links */}
           <div className="space-y-4">
             <h4 className="font-semibold text-foreground">Quick Links</h4>
             <div className="space-y-2">
-              <a href="#" className="block text-muted-foreground hover:text-primary transition-colors text-sm">
+              <button
+                type="button"
+                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                className="block w-full text-left text-muted-foreground hover:text-primary transition-colors text-sm"
+              >
                 Home
-              </a>
-              <a href="#" className="block text-muted-foreground hover:text-primary transition-colors text-sm">
+              </button>
+              <button
+                type="button"
+                onClick={() => document.getElementById('featured-products')?.scrollIntoView({ behavior: 'smooth' })}
+                className="block w-full text-left text-muted-foreground hover:text-primary transition-colors text-sm"
+              >
                 All Products
-              </a>
-              <a href="#" className="block text-muted-foreground hover:text-primary transition-colors text-sm">
+              </button>
+              <button
+                type="button"
+                onClick={() => document.getElementById('categories')?.scrollIntoView({ behavior: 'smooth' })}
+                className="block w-full text-left text-muted-foreground hover:text-primary transition-colors text-sm"
+              >
                 Gift Boxes
-              </a>
-              <a href="#" className="block text-muted-foreground hover:text-primary transition-colors text-sm">
+              </button>
+              <button
+                type="button"
+                onClick={() => document.getElementById('footer')?.scrollIntoView({ behavior: 'smooth' })}
+                className="block w-full text-left text-muted-foreground hover:text-primary transition-colors text-sm"
+              >
                 Safety Guidelines
-              </a>
-              <a href="#" className="block text-muted-foreground hover:text-primary transition-colors text-sm">
+              </button>
+              <button
+                type="button"
+                onClick={() => document.getElementById('footer')?.scrollIntoView({ behavior: 'smooth' })}
+                className="block w-full text-left text-muted-foreground hover:text-primary transition-colors text-sm"
+              >
                 About Us
-              </a>
-              <a href="#" className="block text-muted-foreground hover:text-primary transition-colors text-sm">
+              </button>
+              <button
+                type="button"
+                onClick={() => document.getElementById('footer')?.scrollIntoView({ behavior: 'smooth' })}
+                className="block w-full text-left text-muted-foreground hover:text-primary transition-colors text-sm"
+              >
                 Contact
-              </a>
+              </button>
             </div>
           </div>
 
-          {/* Categories */}
           <div className="space-y-4">
             <h4 className="font-semibold text-foreground">Categories</h4>
             <div className="space-y-2">
-              <a href="#" className="block text-muted-foreground hover:text-primary transition-colors text-sm">
-                Sparklers
-              </a>
-              <a href="#" className="block text-muted-foreground hover:text-primary transition-colors text-sm">
-                Flower Pots
-              </a>
-              <a href="#" className="block text-muted-foreground hover:text-primary transition-colors text-sm">
-                Rockets & Aerial
-              </a>
-              <a href="#" className="block text-muted-foreground hover:text-primary transition-colors text-sm">
-                Ground Chakkars
-              </a>
-              <a href="#" className="block text-muted-foreground hover:text-primary transition-colors text-sm">
-                Fancy Crackers
-              </a>
-              <a href="#" className="block text-muted-foreground hover:text-primary transition-colors text-sm">
-                Gift Boxes
-              </a>
+              {[
+                'Sparklers',
+                'Flower Pots',
+                'Rockets & Aerial',
+                'Ground Chakkars',
+                'Fancy Crackers',
+                'Gift Boxes',
+              ].map((label) => (
+                <button
+                  key={label}
+                  type="button"
+                  onClick={() => document.getElementById('categories')?.scrollIntoView({ behavior: 'smooth' })}
+                  className="block w-full text-left text-muted-foreground hover:text-primary transition-colors text-sm"
+                >
+                  {label}
+                </button>
+              ))}
             </div>
           </div>
 
